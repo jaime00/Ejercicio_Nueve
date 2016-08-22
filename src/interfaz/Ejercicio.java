@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jaime
@@ -74,6 +76,11 @@ public class Ejercicio extends javax.swing.JFrame {
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, -1, -1));
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, -1, -1));
 
         jLabel4.setText("Costo de la llamada");
@@ -114,8 +121,37 @@ public class Ejercicio extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
-        // TODO add your handling code here:
+   
+    if(txtSaldoInicial.getText().trim().isEmpty()){
+        JOptionPane.showMessageDialog(this, "Digite el saldo inicial","ERROR",JOptionPane.ERROR_MESSAGE);
+        txtSaldoInicial.requestFocusInWindow();
+    }else if(txtSaldoFinal.getText().trim().isEmpty()){
+        JOptionPane.showMessageDialog(this, "Digite saldo final","ERROR",JOptionPane.ERROR_MESSAGE);
+        txtSaldoFinal.requestFocusInWindow();
+    }else{
+        
+        double saldoi=Double.parseDouble(txtSaldoInicial.getText());
+        double saldof=Double.parseDouble(txtSaldoFinal.getText());
+    
+        double recargo=((saldoi-saldof)*20)/100;
+        double valor=(saldoi-saldof)+recargo;
+        
+        lblCosto.setText(""+valor);
+
+                }
+        
+        
     }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+
+        txtSaldoFinal.setText("");
+        txtSaldoInicial.setText("");
+        lblCosto.setText("");
+        
+        txtSaldoInicial.requestFocusInWindow();
+        
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
